@@ -15,7 +15,6 @@ public class AddonRegistry {
 
     private AddonRegistry() {
         this.addons = new ArrayList<Addon>();
-        this.init();
     }
 
     public static AddonRegistry getInstance() {
@@ -35,15 +34,5 @@ public class AddonRegistry {
 
     public void unregister(Addon addon) {
         this.addons.remove(addon);
-    }
-
-    /**
-     * Put some example data.
-     */
-    private void init() {
-        this.register(new Addon("foobar1", "entrypoint1"));
-        this.register(new Addon("foobar2", "entrypoint2"));
-        this.register(new Addon("foobar3", "entrypoint3"));
-        this.register(new Addon("foobar4", "entrypoint4"));
     }
 }
