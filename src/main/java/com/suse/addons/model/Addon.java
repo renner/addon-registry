@@ -1,7 +1,7 @@
 package com.suse.addons.model;
 
 /**
- * Class representing a single add-on.
+ * Class representing a single add-on bean.
  */
 public class Addon {
 
