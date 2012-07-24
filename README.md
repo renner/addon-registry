@@ -40,3 +40,6 @@ In your Java webapp code you can then work with add-ons like this:
         print("Name: " + addon.getName());
     }
 
+Further you will be able to register your add-on like this:
+
+    registry.register(new Addon("name", "entrypoint"));
