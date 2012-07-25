@@ -1,11 +1,11 @@
 # addon-registry
 
-`addon-registry` is a generic registry for add-ons to be used via JNDI within web applications.
+This is a generic registry for add-ons (in the sense of plugins) to be used via JNDI within web applications.
 
 ## Declaring the Resource
 
-Declare a `Resource` in your app server's configuration. For Tomcat you would put this into the `context.xml` file 
-(to be found in the tomcat config directory) inside the `Context` element:
+Declare a `Resource` in your web container's configuration. For Tomcat put this into the `context.xml` 
+file (to be found in the tomcat config directory) inside the `Context` element:
 
     <Resource name="mywebapp/addons" auth="Container"
               type="com.suse.addons.registry.AddonRegistry"
@@ -14,7 +14,8 @@ Declare a `Resource` in your app server's configuration. For Tomcat you would pu
 
 ## Consuming the Resource
 
-Your webapp is the one to make use of this resource, so add this to `WEB-INF/web.xml`:
+To consume add-ons within a webapp, specify the resource in the webapp configuration. For Tomcat 
+add this to `WEB-INF/web.xml`:
 
     <resource-env-ref>
         <description>Object factory for the AddonRegistry singleton</description>
@@ -22,7 +23,7 @@ Your webapp is the one to make use of this resource, so add this to `WEB-INF/web
         <resource-env-ref-type>com.suse.addons.registry.AddonRegistry</resource-env-ref-type>
     </resource-env-ref>
 
-In your Java webapp code you can then work with add-ons like this:
+In the Java code it is then possible to work with add-ons like this:
 
     import javax.naming.Context;
     import javax.naming.InitialContext;
@@ -40,6 +41,6 @@ In your Java webapp code you can then work with add-ons like this:
         print("Name: " + addon.getName());
     }
 
-Further you will be able to register your add-on like this:
+Eventually add-ons should register themselves to the registry like this:
 
     registry.register(new Addon("name", "entrypoint"));
