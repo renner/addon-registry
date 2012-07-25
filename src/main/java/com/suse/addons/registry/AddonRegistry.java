@@ -36,7 +36,7 @@ public class AddonRegistry {
      * Register a given add-on.
      * @param addon
      */
-    public void register(Addon addon) {
+    public synchronized void register(Addon addon) {
         this.addons.add(addon);
     }
 
@@ -44,7 +44,7 @@ public class AddonRegistry {
      * Unregister a given add-on.
      * @param addon
      */
-    public void unregister(Addon addon) {
+    public synchronized void unregister(Addon addon) {
         this.addons.remove(addon);
     }
 
