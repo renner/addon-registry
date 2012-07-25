@@ -6,16 +6,16 @@ package com.suse.addons.model;
 public class Addon {
 
     private String name;
-    private String entryPoint;
+    private String entry;
 
     /**
      * Constructor.
      * @param name
-     * @param entryPoint
+     * @param entry
      */
-    public Addon(String name, String entryPoint) {
+    public Addon(String name, String entry) {
         this.name = name;
-        this.entryPoint = entryPoint;
+        this.entry = entry;
     }
     /**
      * @return the name
@@ -30,15 +30,15 @@ public class Addon {
         this.name = name;
     }
     /**
-     * @return the entryPoint
+     * @return the entry
      */
-    public String getEntryPoint() {
-        return entryPoint;
+    public String getEntry() {
+        return entry;
     }
     /**
-     * @param entryPoint the entryPoint to set
+     * @param entry the entry to set
      */
-    public void setEntryPoint(String entryPoint) {
-        this.entryPoint = entryPoint;
+    public void setEntry(String entry) {
+        this.entry = entry;
     }
 }
