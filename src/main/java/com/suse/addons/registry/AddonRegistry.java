@@ -1,6 +1,7 @@
 package com.suse.addons.registry;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.suse.addons.model.Addon;
@@ -24,15 +25,19 @@ public class AddonRegistry {
         return instance;
     }
 
-    public List<Addon> getAddons() {
-        return this.addons;
-    }
-
     public void register(Addon addon) {
         this.addons.add(addon);
     }
 
     public void unregister(Addon addon) {
         this.addons.remove(addon);
+    }
+
+    /**
+     * Return add-ons as an unmodifiable list to make it "read-only" for
+     * consumers.
+     */
+    public List<Addon> getAddons() {
+        return Collections.unmodifiableList(this.addons);
     }
 }
