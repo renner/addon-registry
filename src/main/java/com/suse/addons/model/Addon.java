@@ -11,7 +11,9 @@ import com.suse.addons.registry.AddonRegistry;
  */
 public class Addon {
 
-    private static final String ADDONS = "susemanager/addons";
+    // JNDI name used to lookup the registry
+    private static final String ADDONS = "suse/addons";
+
     private String name;
     private String group;
     private String entry;
