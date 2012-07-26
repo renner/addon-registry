@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.suse.addons.exceptions.RegistrationException;
 import com.suse.addons.model.Addon;
 
 /**
@@ -36,9 +37,10 @@ public class AddonRegistry {
      * Register a given add-on.
      * @param addon
      */
-    public synchronized void register(Addon addon) throws Exception {
+    public synchronized void register(Addon addon) throws RegistrationException {
         if (addons.contains(addon)) {
-            throw new Exception("Addon " + addon.getName() + " already exists!");
+            throw new RegistrationException(
+                    "Add-on " + addon.getName() + " already exists!");
         } else {
             this.addons.add(addon);   
         }
