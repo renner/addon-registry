@@ -17,23 +17,13 @@ public class Addon {
 
     private String name;
     private String group;
+    private String description;
     private String entry;
 
     /**
      * Default constructor.
      */
     public Addon() {
-    }
-
-    /**
-     * Constructor.
-     * @param name
-     * @param entry
-     */
-    public Addon(String name, String group, String entry) {
-        this.setName(name);
-        this.setGroup(group);
-        this.setEntry(entry);
     }
 
     /**
@@ -46,8 +36,9 @@ public class Addon {
     /**
      * @param name the name to set
      */
-    public void setName(String name) {
+    public Addon setName(String name) {
         this.name = name;
+        return this;
     }
 
     /**
@@ -60,8 +51,24 @@ public class Addon {
     /**
      * @param group the group to set
      */
-    public void setGroup(String group) {
+    public Addon setGroup(String group) {
         this.group = group;
+        return this;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public Addon setDescription(String description) {
+        this.description = description;
+        return this;
     }
 
     /**
@@ -74,8 +81,9 @@ public class Addon {
     /**
      * @param entry the entry to set
      */
-    public void setEntry(String entry) {
+    public Addon setEntry(String entry) {
         this.entry = entry;
+        return this;
     }
 
     /**
