@@ -4,6 +4,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import com.suse.addons.exceptions.RegistrationException;
 import com.suse.addons.registry.AddonRegistry;
 
 /**
@@ -80,7 +81,7 @@ public class Addon {
     /**
      * Register this add-on.
      */
-    public void register() throws Exception {
+    public void register() throws RegistrationException {
         try {
             Context context = (Context) new InitialContext().lookup("java:comp/env");
             AddonRegistry registry = (AddonRegistry) context.lookup(ADDONS);
