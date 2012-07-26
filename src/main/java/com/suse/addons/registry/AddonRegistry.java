@@ -36,8 +36,12 @@ public class AddonRegistry {
      * Register a given add-on.
      * @param addon
      */
-    public synchronized void register(Addon addon) {
-        this.addons.add(addon);
+    public synchronized void register(Addon addon) throws Exception {
+        if (addons.contains(addon)) {
+            throw new Exception("Addon " + addon.getName() + " already exists!");
+        } else {
+            this.addons.add(addon);   
+        }
     }
 
     /**

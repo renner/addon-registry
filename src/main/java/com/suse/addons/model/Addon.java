@@ -1,10 +1,18 @@
 package com.suse.addons.model;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import com.suse.addons.registry.AddonRegistry;
+
+
 /**
  * Class representing a single add-on bean.
  */
 public class Addon {
 
+    private static final String ADDONS = "susemanager/addons";
     private String name;
     private String entry;
 
@@ -40,5 +48,18 @@ public class Addon {
      */
     public void setEntry(String entry) {
         this.entry = entry;
+    }
+
+    /**
+     * Register itself.
+     */
+    public void register() throws Exception {
+        try {
+            Context context = (Context) new InitialContext().lookup("java:comp/env");
+            AddonRegistry registry = (AddonRegistry) context.lookup(ADDONS);
+            registry.register(this);
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
     }
 }
