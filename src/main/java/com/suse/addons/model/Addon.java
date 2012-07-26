@@ -51,13 +51,26 @@ public class Addon {
     }
 
     /**
-     * Register itself.
+     * Register this add-on.
      */
     public void register() throws Exception {
         try {
             Context context = (Context) new InitialContext().lookup("java:comp/env");
             AddonRegistry registry = (AddonRegistry) context.lookup(ADDONS);
             registry.register(this);
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Unregister this add-on.
+     */
+    public void unregister() {
+        try {
+            Context context = (Context) new InitialContext().lookup("java:comp/env");
+            AddonRegistry registry = (AddonRegistry) context.lookup(ADDONS);
+            registry.unregister(this);
         } catch (NamingException e) {
             e.printStackTrace();
         }
