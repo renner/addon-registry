@@ -13,6 +13,7 @@ import com.suse.addons.registry.AddonRegistry;
 public class Addon {
 
     // JNDI name used to lookup the registry
+    // TODO: Read this from a config file
     private static final String ADDONS = "suse/addons";
 
     private String name;
