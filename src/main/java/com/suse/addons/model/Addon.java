@@ -1,11 +1,17 @@
 package com.suse.addons.model;
 
+import com.suse.addons.exceptions.RegistrationException;
+import com.suse.addons.registry.AddonRegistry;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-
-import com.suse.addons.exceptions.RegistrationException;
-import com.suse.addons.registry.AddonRegistry;
 
 /**
  * Class representing a single add-on bean.
@@ -103,6 +109,49 @@ public class Addon {
         this.entry = entry;
         return this;
     }
+    
+
+    /**
+     * Set entry point from the resource template.
+     * 
+     * @param resource
+     * @param base
+     * @param params  Params to substitute in the template.
+     * @return
+     * @throws IOException 
+     */
+    public Addon setEntryFromResource(String resource, Object base, Map<String, String> params) throws IOException {
+        this.setEntryFromStream(base.getClass().getResourceAsStream(resource), params);
+        return this;
+    }
+
+    
+    /**
+     * Set entry point from the stream template.
+     * 
+     * @param stream
+     * @param params
+     * @return
+     * @throws IOException 
+     */
+    public Addon setEntryFromStream(InputStream stream, Map<String, String> params) throws IOException {
+        StringBuilder out = new StringBuilder();
+        BufferedReader br = new BufferedReader(new InputStreamReader(stream));
+        String read = br.readLine();
+        while(read != null) {
+            out.append(read).append("\n");
+            read = br.readLine();
+        }
+        
+        String entryValue = out.toString();
+        for (String key : params.keySet()) {
+            entryValue = entryValue.replaceAll(key, params.get(key));
+        }
+
+        this.setEntry(entryValue);
+        return this;
+    }
+
 
     /**
      * @return the iconURI
@@ -127,8 +176,8 @@ public class Addon {
             Context context = (Context) new InitialContext().lookup("java:comp/env");
             AddonRegistry registry = (AddonRegistry) context.lookup(ADDONS);
             registry.register(this);
-        } catch (NamingException e) {
-            e.printStackTrace();
+        } catch (NamingException ex) {
+            Logger.getLogger(Addon.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -140,8 +189,8 @@ public class Addon {
             Context context = (Context) new InitialContext().lookup("java:comp/env");
             AddonRegistry registry = (AddonRegistry) context.lookup(ADDONS);
             registry.unregister(this);
-        } catch (NamingException e) {
-            e.printStackTrace();
+        } catch (NamingException ex) {
+            Logger.getLogger(Addon.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
