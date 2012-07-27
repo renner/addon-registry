@@ -109,7 +109,7 @@ public class Addon {
         this.entry = entry;
         return this;
     }
-    
+
 
     /**
      * Set entry point from the resource template.
@@ -125,14 +125,14 @@ public class Addon {
         return this;
     }
 
-    
+
     /**
      * Set entry point from the stream template.
      * 
      * @param stream
      * @param params
      * @return
-     * @throws IOException 
+     * @throws IOException
      */
     public Addon setEntryFromStream(InputStream stream, Map<String, String> params) throws IOException {
         StringBuilder out = new StringBuilder();
@@ -142,10 +142,10 @@ public class Addon {
             out.append(read).append("\n");
             read = br.readLine();
         }
-        
+
         String entryValue = out.toString();
         for (String key : params.keySet()) {
-            entryValue = entryValue.replaceAll(key, params.get(key));
+            entryValue = entryValue.replace(key, params.get(key));
         }
 
         this.setEntry(entryValue);
