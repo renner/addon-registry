@@ -110,35 +110,36 @@ public class Addon {
         return this;
     }
 
-
     /**
-     * Set entry point from the resource template.
-     * 
+     * Set entry point from a resource template.
+     *
      * @param resource
      * @param base
-     * @param params  Params to substitute in the template.
+     * @param params Parameters to be substituted in the template
      * @return
-     * @throws IOException 
+     * @throws IOException
      */
-    public Addon setEntryFromResource(String resource, Object base, Map<String, String> params) throws IOException {
-        this.setEntryFromStream(base.getClass().getResourceAsStream(resource), params);
+    public Addon setEntryFromResource(String resource, Object base,
+            Map<String, String> params) throws IOException {
+        InputStream stream = base.getClass().getResourceAsStream(resource);
+        this.setEntryFromStream(stream, params);
         return this;
     }
 
-
     /**
-     * Set entry point from the stream template.
-     * 
+     * Set entry point from a stream template.
+     *
      * @param stream
      * @param params
      * @return
      * @throws IOException
      */
-    public Addon setEntryFromStream(InputStream stream, Map<String, String> params) throws IOException {
+    public Addon setEntryFromStream(InputStream stream, Map<String, String> params)
+            throws IOException {
         StringBuilder out = new StringBuilder();
         BufferedReader br = new BufferedReader(new InputStreamReader(stream));
         String read = br.readLine();
-        while(read != null) {
+        while (read != null) {
             out.append(read).append("\n");
             read = br.readLine();
         }
@@ -151,7 +152,6 @@ public class Addon {
         this.setEntry(entryValue);
         return this;
     }
-
 
     /**
      * @return the iconURI
