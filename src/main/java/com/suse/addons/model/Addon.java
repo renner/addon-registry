@@ -39,8 +39,9 @@ public class Addon {
     /**
      * @param id the id to set
      */
-    public void setId(String id) {
+    public Addon setId(String id) {
         this.id = id;
+        return this;
     }
 
     /**
