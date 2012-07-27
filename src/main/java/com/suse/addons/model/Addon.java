@@ -21,6 +21,7 @@ public class Addon {
     private String group;
     private String description;
     private String entry;
+    private String iconURI;
 
     /**
      * Default constructor.
@@ -99,6 +100,21 @@ public class Addon {
      */
     public Addon setEntry(String entry) {
         this.entry = entry;
+        return this;
+    }
+
+    /**
+     * @return the iconURI
+     */
+    public String getIconURI() {
+        return iconURI;
+    }
+
+    /**
+     * @param iconURI the iconURI to set
+     */
+    public Addon setIconURI(String iconURI) {
+        this.iconURI = iconURI;
         return this;
     }
 
