@@ -3,6 +3,7 @@ package com.suse.addons.registry;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import com.suse.addons.exceptions.RegistrationException;
 import com.suse.addons.model.Addon;
@@ -42,7 +43,8 @@ public class AddonRegistry {
             throw new RegistrationException(
                     "Add-on " + addon.getName() + " already exists!");
         } else {
-            this.addons.add(addon);   
+            addon.setId(UUID.randomUUID().toString());
+            this.addons.add(addon);
         }
     }
 

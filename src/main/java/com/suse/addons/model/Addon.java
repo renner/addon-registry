@@ -16,6 +16,7 @@ public class Addon {
     // TODO: Read this from a config file
     private static final String ADDONS = "suse/addons";
 
+    private String id;
     private String name;
     private String group;
     private String description;
@@ -25,6 +26,20 @@ public class Addon {
      * Default constructor.
      */
     public Addon() {
+    }
+
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
