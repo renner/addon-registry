@@ -1,11 +1,11 @@
 # addon-registry
 
-This is a generic plugin registry to be used via JNDI within application servers or web applications.
+Generic plugin registry to be used via JNDI within application servers or web applications.
 
-## Declaring the Resource
+## Declaring the Registry as a JNDI Resource
 
 To make use of the plugin registry from different applications, it is necessary to define a global JNDI resource 
-in the server's configuration. For Tomcat this needs to be done in the `server.xml` file:
+in the application server's configuration. For Tomcat this needs to be done in the `server.xml` file:
 
     <GlobalNamingResources>
         <Resource name="mywebapp/addons" auth="Container"
@@ -20,16 +20,23 @@ done globally for all applications in the `context.xml` file:
         <ResourceLink global="mywebapp/addons" name="mywebapp/addons" />
     </Context>
 
-## Consuming the Resource
+## Consuming the Registry
 
-Add-ons should register themselves to the registry like this:
+Add-ons should register themselves like this:
 
+    import javax.naming.Context;
+    import javax.naming.InitialContext;
+    import com.suse.addons.model.Addon;
+    import com.suse.addons.registry.AddonRegistry;
+    ...
+    Context context = (Context) new InitialContext().lookup("java:comp/env");
+    AddonRegistry registry = (AddonRegistry) context.lookup("mywebapp/addons");
+    ...
     Addon addon = new Addon();
     addon.setName("Foobar");
-    ...
     registry.register(addon);
 
-In the Java application code it is possible to work with add-ons like this:
+In the application code it is possible to work with registered add-ons like this:
 
     import javax.naming.Context;
     import javax.naming.InitialContext;
